@@ -7,7 +7,7 @@ import AdminDashBoard from '../modules/DashBoard/index';
 class Dashboard extends Component {
   render() {
     const {
-      signinReducerData: { receiveSignin, requestSignin },
+      signinReducerData: { requestSignin },
     } = this.props;
 
     if (requestSignin) {

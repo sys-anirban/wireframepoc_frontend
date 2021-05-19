@@ -1,4 +1,4 @@
 export const endPoints = () => ({
-  signinurl: `user/login`,
+  signinurl: '/user/login',
 });
 export default endPoints;

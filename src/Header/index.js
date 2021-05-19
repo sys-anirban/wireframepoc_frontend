@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import Logo from './Logo';
+import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const HeaderWrapper = styled.div`
   margin: 0;
   width: 100%;
   background-color: teal;
@@ -13,14 +12,7 @@ const Wrapper = styled.div`
     width: 363px;
   }
 `;
-const HeaderLogo = styled.div``;
-class Header extends Component {
-  render() {
-    return (
-      <Wrapper>
-        <Logo />
-      </Wrapper>
-    );
-  }
-}
+const Header = () => {
+  return <HeaderWrapper />;
+};
 export default Header;

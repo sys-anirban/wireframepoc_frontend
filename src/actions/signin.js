@@ -3,6 +3,7 @@ import apiClient from '../components/constants/apiClient';
 import endPoints from '../components/constants/Config';
 const host = process.env.Server_Url;
 export function signin(loginCredentials) {
+  console.log('${host}${endPoints().signinurl}', `${host}${endPoints().signinurl}`);
   return (dispatch) => {
     dispatch({ type: actions.REQUEST_SIGN_IN });
     return apiClient

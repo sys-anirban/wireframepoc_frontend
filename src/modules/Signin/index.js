@@ -34,12 +34,12 @@ const Button = styled.button`
 class Signin extends Component {
   render() {
     const {
-      signinReducerData: { failedSignin },
+      signinReducerData: { signinFailed },
     } = this.props;
     const initialValues = { username: '', password: '' };
     return (
       <Wrapper>
-        {failedSignin && <p>Invaliad Credentials</p>}
+        {signinFailed && <p>Invaliad Credentials</p>}
         <Form initialValues={initialValues} onSubmit={(values) => this.props.signin(values)} enableReinitialize={true}>
           <div className="row">
             <div className="col-2" />
