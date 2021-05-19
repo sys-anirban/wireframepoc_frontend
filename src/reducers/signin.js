@@ -1,19 +1,36 @@
 import actions from '../components/constants/actionTypes';
 
 const defaultState = {
-  isVerifiedPassword: false,
-  requestSignin: false,
-  signinSuccess: false,
-  signinFailed: false,
+  isLoading: false,
+  isFailed: false,
+  loginResponse: {
+    errros: [],
+    isUserAuthenticated: false,
+  },
 };
 export const signin = (state = defaultState, action) => {
+  console.log('Payload', action.payload);
   switch (action.type) {
     case actions.REQUEST_SIGN_IN:
-      return { ...state, requestSignin: true, signinSuccess: false, signinFailed: false };
+      return {
+        ...state,
+        isLoading: true,
+      };
     case actions.RECEIVE_SIGN_IN:
-      return { ...state, data: action.payload.data, signinSuccess: true, signinFailed: false, requestSignin: false };
+      return {
+        ...state,
+        isLoading: false,
+        loginResponse: {
+          isUserAuthenticated: action.payload.loginResponse.isUserAuthenticated,
+          errors: action.payload.loginResponse.errors,
+        },
+      };
     case actions.FAILED_SIGN_IN:
-      return { ...state, requestSignin: false, signinSuccess: false, signinFailed: true };
+      return {
+        ...state,
+        isLoading: false,
+        isFailed: true,
+      };
     default:
       return state;
   }
