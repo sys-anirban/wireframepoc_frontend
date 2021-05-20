@@ -13,10 +13,15 @@ class Form extends Component {
     }
   };
   render() {
-    const { initialValues, enableReinitialize, children, className } = this.props;
+    const { initialValues, enableReinitialize, children, className, validationSchema } = this.props;
     return (
       <div className={className}>
-        <Formik onSubmit={this.onSubmit} initialValues={initialValues} enableReinitialize={enableReinitialize}>
+        <Formik
+          onSubmit={this.onSubmit}
+          initialValues={initialValues}
+          enableReinitialize={enableReinitialize}
+          validationSchema={validationSchema}
+        >
           {() => <FromikForm>{children}</FromikForm>}
         </Formik>
       </div>
