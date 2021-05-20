@@ -2,14 +2,10 @@ import actions from '../components/constants/actionTypes';
 
 const defaultState = {
   isLoading: false,
-  isFailed: false,
-  loginResponse: {
-    errros: [],
-    isUserAuthenticated: false,
-  },
+  isUserAuthenticated: false,
+  isInvalid: false,
 };
 export const signin = (state = defaultState, action) => {
-  console.log('Payload', action.payload);
   switch (action.type) {
     case actions.REQUEST_SIGN_IN:
       return {
@@ -20,16 +16,14 @@ export const signin = (state = defaultState, action) => {
       return {
         ...state,
         isLoading: false,
-        loginResponse: {
-          isUserAuthenticated: action.payload.loginResponse.isUserAuthenticated,
-          errors: action.payload.loginResponse.errors,
-        },
+        isUserAuthenticated: action.payload.isUserAuthenticated,
+        isInvalid: false,
       };
     case actions.FAILED_SIGN_IN:
       return {
         ...state,
         isLoading: false,
-        isFailed: true,
+        isInvalid: true,
       };
     default:
       return state;

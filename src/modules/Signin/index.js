@@ -34,17 +34,16 @@ const Button = styled.button`
 class Signin extends Component {
   render() {
     const {
-      signinReducerData: {
-        isFailed,
-        loginResponse: { isUserAuthenticated, errors },
-      },
+      signinReducerData: { isLoading, isUserAuthenticated, isInvalid },
     } = this.props;
-    console.log('Props', isUserAuthenticated, isFailed);
     const initialValues = { username: '', password: '' };
+
+    if (isLoading) {
+      return <p>Loading</p>;
+    }
     return (
       <Wrapper>
-        {isFailed && errors && errors.length > 0 && <p>Validation failed</p>}
-        {isFailed && !isUserAuthenticated && <p>Invalid credentials</p>}
+        {isInvalid && <p>Invalid credentials</p>}
         <Form initialValues={initialValues} onSubmit={(values) => this.props.signin(values)} enableReinitialize={true}>
           <div className="row">
             <div className="col-2" />

@@ -8,9 +8,13 @@ export function signin(loginCredentials) {
     return apiClient
       .post(`${endPoints().signinurl}`, loginCredentials)
       .then((res) => {
+        const { token, isUserAuthenticated } = res.data;
         sessionStorage.setItem('token', res.data.token);
-        dispatch({ type: actions.RECEIVE_SIGN_IN, payload: res });
+        sessionStorage.setItem('authenticated', isUserAuthenticated);
+        dispatch({ type: actions.RECEIVE_SIGN_IN, payload: { isUserAuthenticated, token } });
       })
-      .catch((error) => dispatch({ type: actions.FAILED_SIGN_IN }));
+      .catch((error) => {
+        dispatch({ type: actions.FAILED_SIGN_IN, payload: error.response.data });
+      });
   };
 }
