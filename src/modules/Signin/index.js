@@ -4,6 +4,7 @@ import { signin } from '../../actions/signin';
 import { connect } from 'react-redux';
 import Form from '../../components/Form/Form';
 import { Field } from 'formik';
+import Loader from '../../components/Loader';
 
 const Wrapper = styled.div`
   height: 200px;
@@ -39,7 +40,10 @@ class Signin extends Component {
     const initialValues = { username: '', password: '' };
 
     if (isLoading) {
-      return <p>Loading</p>;
+      return <Loader />;
+    }
+    if (isUserAuthenticated) {
+      this.props.history.push('/dashboard');
     }
     return (
       <Wrapper>
