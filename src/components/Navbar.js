@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -27,15 +28,15 @@ class NavbarComponent extends Component {
     const { pathname } = this.props;
     return (
       <Wrapper>
-        <a href="/dashboard" className={pathname === '/' ? `active` : ''}>
+        <NavLink to="/dashboard" className={pathname === '/' ? `active` : ''}>
           Dashboard
-        </a>
-        <a href="/about" className={pathname === '/about' ? `active` : ''}>
+        </NavLink>
+        <NavLink to="/about" className={pathname === '/about' ? `active` : ''}>
           About
-        </a>
-        <a href="/team" className={pathname === '/team' ? `active` : ''}>
+        </NavLink>
+        <NavLink to="/team" className={pathname === '/team' ? `active` : ''}>
           Team
-        </a>
+        </NavLink>
       </Wrapper>
     );
   }
