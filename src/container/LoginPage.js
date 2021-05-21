@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LoginPage from '../modules/Signin/index';
 
 const LoginModule = (props) => {

@@ -54,7 +54,11 @@ class Signin extends Component {
     }
     return (
       <Wrapper>
-        {isInvalid && <p>Invalid credentials</p>}
+        {isInvalid && (
+          <div style={{ backgroundColor: '#b1b481' }}>
+            <p style={{ color: 'white' }}>Invalid credentials</p>
+          </div>
+        )}
         <Form
           initialValues={initialValues}
           validationSchema={loginValidation}
@@ -63,30 +67,36 @@ class Signin extends Component {
         >
           <div className="row">
             <div className="col-2" />
-            <div className="col-4">
-              <label>User Name</label>
-              <Field name="username" type="text" placeholder="User Name" className="form-control" />
-              <ErrorMessage name="username">
-                {(msg) => (
-                  <p style={{ color: 'red' }} className="text-left">
-                    {msg}
-                  </p>
-                )}
-              </ErrorMessage>
-            </div>
-            <div className="col-4">
-              <label>Password</label>
-              <Field name="password" type="password" placeholder="Password" className="form-control" />
-              <ErrorMessage name="password">
-                {(msg) => (
-                  <p style={{ color: 'red' }} className="text-left">
-                    {msg}
-                  </p>
-                )}
-              </ErrorMessage>
+            <div className="col-8">
+              <div className="row">
+                <div className="col-6">
+                  <label>User Name</label>
+                  <Field name="username" type="text" placeholder="User Name" className="form-control" />
+                  <ErrorMessage name="username">
+                    {(msg) => (
+                      <p style={{ color: 'red', fontWeight: 'normal' }} className="text-left">
+                        {msg}
+                      </p>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div className="col-6">
+                  <label>Password</label>
+                  <Field name="password" type="password" placeholder="Password" className="form-control" />
+                  <ErrorMessage name="password">
+                    {(msg) => (
+                      <div>
+                        <p style={{ color: 'red', fontWeight: 'normal' }} className="text-left">
+                          {msg}
+                        </p>
+                      </div>
+                    )}
+                  </ErrorMessage>
+                </div>
+              </div>
             </div>
           </div>
-          <Button type="submit">{isLoading ? 'Loading' : 'Login'}</Button>
+          <Button type="submit">Login</Button>
         </Form>
       </Wrapper>
     );
