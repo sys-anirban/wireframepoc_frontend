@@ -1,11 +1,12 @@
 import React from 'react';
 import ApplicationWrapper from '../../container/Application';
+import TeamDetails from './Team';
 
 const TeamComponent = () => {
   return (
-    <div>
+    <div style={{ backgroundColor: '#969595' }}>
       <ApplicationWrapper>
-        <p>Team Component</p>
+        <TeamDetails />
       </ApplicationWrapper>
     </div>
   );

@@ -4,7 +4,7 @@ import AboutDetails from './About';
 
 const AboutComponent = () => {
   return (
-    <div>
+    <div style={{ backgroundColor: '#969595' }}>
       <ApplicationWrapper>
         <AboutDetails />
       </ApplicationWrapper>

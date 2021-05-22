@@ -3,7 +3,7 @@ import ApplicationWrapper from '../../container/Application';
 import UserDetails from './userdetails';
 const DashBoard = () => {
   return (
-    <div>
+    <div style={{ backgroundColor: '#969595' }}>
       <ApplicationWrapper>
         <UserDetails />
       </ApplicationWrapper>
