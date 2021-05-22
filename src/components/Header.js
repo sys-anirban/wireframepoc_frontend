@@ -5,12 +5,8 @@ const HeaderWrapper = styled.div`
   margin: 0;
   width: 100%;
   background-color: teal;
-  height: 100px;
+  height: 50px;
   padding-top: 7px;
-  img {
-    height: 86px;
-    width: 363px;
-  }
 `;
 const Header = () => {
   return <HeaderWrapper />;

@@ -1,11 +1,12 @@
 import React from 'react';
 import ApplicationWrapper from '../../container/Application';
+import AboutDetails from './About';
 
 const AboutComponent = () => {
   return (
     <div>
       <ApplicationWrapper>
-        <p>About Component</p>
+        <AboutDetails />
       </ApplicationWrapper>
     </div>
   );

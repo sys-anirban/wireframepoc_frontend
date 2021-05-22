@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import Header from '../Header/index';
 import Navbar from '../components/Navbar';
 
 const ApplicationWrapper = (props) => {

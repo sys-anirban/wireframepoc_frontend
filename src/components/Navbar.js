@@ -6,6 +6,7 @@ import { changeComponent } from '../actions/componentHandler';
 const Wrapper = styled.div`
   overflow: hidden;
   background-color: #333;
+  margin-top: 10px;
   span {
     float: left;
     color: #f2f2f2;

@@ -4,14 +4,11 @@ import Loader from './components/Loader';
 import HistoryRouter from './components/HistoryRouter';
 import { Route } from 'react-router-dom';
 import Errorboundary from './components/Errorboundary';
-import Header from './Header/index';
+import Header from './components/Header';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const BoardComponent = lazy(() => import('./container/index'));
-// const Dashboard = lazy(() => import('./container/Dashboard'));
-// const About = lazy(() => import('./container/About'));
-// const Team = lazy(() => import('./container/Team'));
 
 class App extends Component {
   render() {
@@ -23,9 +20,6 @@ class App extends Component {
               <Header />
               <Switch>
                 <Route exact path="/" render={(props) => <BoardComponent {...props} />} />
-                {/* <Route exact path="/dashboard" render={(props) => <Dashboard {...props} />} />
-                <Route exact path="/about" render={(props) => <About {...props} />} />
-                <Route exact path="/team" render={(props) => <Team {...props} />} /> */}
               </Switch>
             </Suspense>
           </Errorboundary>
