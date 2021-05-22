@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
-import NavbarComponent from '../../components/Navbar';
+import React from 'react';
+import ApplicationWrapper from '../../container/Application';
 
-class AboutComponent extends Component {
-  render() {
-    const { pathname } = this.props.history.location;
-    return (
-      <div>
-        <NavbarComponent pathname={pathname} />
+const AboutComponent = () => {
+  return (
+    <div>
+      <ApplicationWrapper>
         <p>About Component</p>
-      </div>
-    );
-  }
-}
+      </ApplicationWrapper>
+    </div>
+  );
+};
 export default AboutComponent;

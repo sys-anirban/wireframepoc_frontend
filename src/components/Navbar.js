@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { changeComponent } from '../actions/componentHandler';
 
 const Wrapper = styled.div`
   overflow: hidden;
   background-color: #333;
-  a {
+  span {
     float: left;
     color: #f2f2f2;
     text-align: center;
@@ -25,20 +26,22 @@ const Wrapper = styled.div`
 
 class NavbarComponent extends Component {
   render() {
-    const { pathname } = this.props;
+    const {
+      componentHandler: { page },
+    } = this.props;
     return (
       <Wrapper>
-        <NavLink to="/dashboard" className={pathname === '/' ? `active` : ''}>
+        <span className={page === 'dashboard' ? 'active' : ''} onClick={() => this.props.changeComponent('dashboard')}>
           Dashboard
-        </NavLink>
-        <NavLink to="/about" className={pathname === '/about' ? `active` : ''}>
+        </span>
+        <span className={page === 'about' ? 'active' : ''} onClick={() => this.props.changeComponent('about')}>
           About
-        </NavLink>
-        <NavLink to="/team" className={pathname === '/team' ? `active` : ''}>
+        </span>
+        <span className={page === 'team' ? 'active' : ''} onClick={() => this.props.changeComponent('team')}>
           Team
-        </NavLink>
+        </span>
       </Wrapper>
     );
   }
 }
-export default NavbarComponent;
+export default connect((state) => ({ componentHandler: state.componentHandler }), { changeComponent })(NavbarComponent);

@@ -49,9 +49,6 @@ class Signin extends Component {
     if (isLoading) {
       return <Loader />;
     }
-    if (isUserAuthenticated) {
-      this.props.history.push('/dashboard');
-    }
     return (
       <Wrapper>
         {isInvalid && (

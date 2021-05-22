@@ -8,10 +8,10 @@ import Header from './Header/index';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const LoginPage = lazy(() => import('./container/LoginPage'));
-const Dashboard = lazy(() => import('./container/Dashboard'));
-const About = lazy(() => import('./container/About'));
-const Team = lazy(() => import('./container/Team'));
+const BoardComponent = lazy(() => import('./container/index'));
+// const Dashboard = lazy(() => import('./container/Dashboard'));
+// const About = lazy(() => import('./container/About'));
+// const Team = lazy(() => import('./container/Team'));
 
 class App extends Component {
   render() {
@@ -22,10 +22,10 @@ class App extends Component {
             <Suspense fallback={<Loader />}>
               <Header />
               <Switch>
-                <Route exact path="/" render={(props) => <LoginPage {...props} />} />
-                <Route exact path="/dashboard" render={(props) => <Dashboard {...props} />} />
+                <Route exact path="/" render={(props) => <BoardComponent {...props} />} />
+                {/* <Route exact path="/dashboard" render={(props) => <Dashboard {...props} />} />
                 <Route exact path="/about" render={(props) => <About {...props} />} />
-                <Route exact path="/team" render={(props) => <Team {...props} />} />
+                <Route exact path="/team" render={(props) => <Team {...props} />} /> */}
               </Switch>
             </Suspense>
           </Errorboundary>

@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
-import NavbarComponent from '../../components/Navbar';
+import React from 'react';
+import ApplicationWrapper from '../../container/Application';
 
-class DashBoard extends Component {
-  render() {
-    const { pathname } = this.props.history.location;
-    return (
-      <div>
-        <NavbarComponent pathname={pathname} />
-        <p>DashBoard Component</p>
-      </div>
-    );
-  }
-}
+const DashBoard = () => {
+  return (
+    <div>
+      <ApplicationWrapper>
+        <p>Dashboard Component</p>
+      </ApplicationWrapper>
+    </div>
+  );
+};
 export default DashBoard;
