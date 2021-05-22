@@ -35,16 +35,16 @@ const Button = styled.button`
 `;
 
 const loginValidation = Yup.object().shape({
-  username: Yup.string().min(8, 'Too Short!').max(20, 'Too Long!').required('Username is required'),
+  emailid: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().min(8, 'Too Short!').max(20, 'Too Long!').required('Password is Required'),
 });
 
 class Signin extends Component {
   render() {
     const {
-      signinReducerData: { isLoading, isUserAuthenticated, isInvalid },
+      signinReducerData: { isLoading, isInvalid },
     } = this.props;
-    const initialValues = { username: '', password: '' };
+    const initialValues = { emailid: '', password: '' };
 
     if (isLoading) {
       return <Loader />;
@@ -67,9 +67,9 @@ class Signin extends Component {
             <div className="col-8">
               <div className="row">
                 <div className="col-6">
-                  <label>User Name</label>
-                  <Field name="username" type="text" placeholder="User Name" className="form-control" />
-                  <ErrorMessage name="username">
+                  <label>Email Id</label>
+                  <Field name="emailid" type="text" placeholder="Email Id" className="form-control" />
+                  <ErrorMessage name="emailid">
                     {(msg) => (
                       <p style={{ color: 'red', fontWeight: 'normal' }} className="text-left">
                         {msg}
