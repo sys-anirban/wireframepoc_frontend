@@ -7,7 +7,7 @@ export const fetchofficialdetails = () => {
   return (dispatch) => {
     dispatch({ type: actions.REQUEST_OFFICIAL_DETAILS });
     return apiClient
-      .get(`${endPoints().officialdetailsurl}?emailid=${emailid}`)
+      .get(`${endPoints().officialdetailsurl}`, { headers: { emailid } })
       .then((res) => {
         dispatch({ type: actions.RECEIVE_OFFICIAL_DETAILS, payload: res.data });
       })
@@ -25,10 +25,14 @@ export const updateskillset = (skilltype, skillname) => {
     const updatedSkills = existedSkills + ',' + skillname;
     dispatch({ type: actions.REQUEST_UPDATE_SKILL });
     return apiClient
-      .patch(`${endPoints().updateskillset}?emailid=${emailid}`, {
-        skilltype,
-        updatedSkills,
-      })
+      .patch(
+        `${endPoints().updateskillset}`,
+        {
+          skilltype,
+          updatedSkills,
+        },
+        { headers: { emailid } },
+      )
       .then((res) => {
         dispatch({ type: actions.RECEIVE_UPDATE_SKILL, payload: res.data });
       })

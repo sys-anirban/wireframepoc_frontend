@@ -7,7 +7,7 @@ export const fetchuserdetails = () => {
   return (dispatch) => {
     dispatch({ type: actions.REQUEST_USER_DETAILS });
     return apiClient
-      .get(`${endPoints().userdetailsurl}?emailid=${emailid}`)
+      .get(`${endPoints().userdetailsurl}`, { headers: { emailid } })
       .then((res) => {
         dispatch({ type: actions.RECEIVE_USER_DETAILS, payload: res.data });
       })
