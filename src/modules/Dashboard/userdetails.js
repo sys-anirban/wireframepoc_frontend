@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { fetchuserdetails } from '../../actions/userdetails';
 
 const Wrapper = styled.div`
   background-color: #b8b894;
@@ -93,15 +95,24 @@ class UserDetails extends React.Component {
   changeHandler = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
+  async componentDidMount() {
+    const emailid = sessionStorage.getItem('emailid');
+    this.props.fetchuserdetails(emailid);
+  }
   render() {
     const { skillname, skilltype } = this.state;
+    // console.log('userdetails', this.props.userdetails);
+    const { userdetails, isFetchingUserdetails } = this.props.userdetails;
+    const { fname, mname, lname, image, houseno, city, poffice, landmark, state, pin } = userdetails;
+    const name = fname + ' ' + mname + ' ' + lname;
+    const address = houseno + ', ' + city + ', ' + poffice + ', ' + landmark + ', ' + state + ', ' + pin;
     return (
       <Wrapper>
         <div className="imageWrapper">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" />
+          <img src={image} />
         </div>
         <div className="detailsWrapper">
-          <p className="username">Welcome Anirban Ghatak !</p>
+          <p className="username">{`Welcome ${name} !`}</p>
           <p>Last Login: 04 Feb 2021</p>
           <p className="accountbalance">
             Manager: <span>Alexsandra Relaniq</span>
@@ -115,8 +126,8 @@ class UserDetails extends React.Component {
               <th>Manager</th>
             </tr>
             <tr>
-              <td>Anirban Ghatak</td>
-              <td>B Complex,Serasole,Raniganj,Paschim Bardhaman,713358</td>
+              <td>{name}</td>
+              <td>{address}</td>
               <td>React JS</td>
               <td>Express JS,Mongo DB,IIS 7,MS Azure</td>
               <td>abcd@xyz.com</td>
@@ -153,4 +164,4 @@ class UserDetails extends React.Component {
     );
   }
 }
-export default UserDetails;
+export default connect((state) => ({ userdetails: state.userdetails }), { fetchuserdetails })(UserDetails);

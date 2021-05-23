@@ -2,7 +2,7 @@ import actions from '../components/constants/actionTypes';
 import apiClient from '../components/constants/apiClient';
 import endPoints from '../components/constants/Config';
 
-export function signin(loginCredentials) {
+export const signin = (loginCredentials) => {
   return (dispatch) => {
     dispatch({ type: actions.REQUEST_SIGN_IN });
     return apiClient
@@ -18,4 +18,4 @@ export function signin(loginCredentials) {
         dispatch({ type: actions.FAILED_SIGN_IN, payload: error.response.data });
       });
   };
-}
+};
