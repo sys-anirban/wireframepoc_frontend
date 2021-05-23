@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { fetchuserdetails } from '../../actions/userdetails';
+import { fetchofficialdetails } from '../../actions/officialdetails';
+import Loader from '../../components/Loader';
 
 const Wrapper = styled.div`
   background-color: #b8b894;
@@ -96,16 +98,24 @@ class UserDetails extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   async componentDidMount() {
-    const emailid = sessionStorage.getItem('emailid');
-    this.props.fetchuserdetails(emailid);
+    this.props.fetchuserdetails();
+    this.props.fetchofficialdetails();
   }
   render() {
     const { skillname, skilltype } = this.state;
-    // console.log('userdetails', this.props.userdetails);
+    //userdetails reducer
     const { userdetails, isFetchingUserdetails } = this.props.userdetails;
     const { fname, mname, lname, image, houseno, city, poffice, landmark, state, pin } = userdetails;
+
+    //officialdetails reducer
+    const { officialdetails, isFetchingOfficialdetails } = this.props.officialdetails;
+    const { empcode, manager, memail, pskill, sskill } = officialdetails;
+
     const name = fname + ' ' + mname + ' ' + lname;
     const address = houseno + ', ' + city + ', ' + poffice + ', ' + landmark + ', ' + state + ', ' + pin;
+    if (isFetchingUserdetails) {
+      return <Loader />;
+    }
     return (
       <Wrapper>
         <div className="imageWrapper">
@@ -115,22 +125,22 @@ class UserDetails extends React.Component {
           <p className="username">{`Welcome ${name} !`}</p>
           <p>Last Login: 04 Feb 2021</p>
           <p className="accountbalance">
-            Manager: <span>Alexsandra Relaniq</span>
+            Manager: <span>{manager}</span>
           </p>
           <table className="customers">
             <tr>
-              <th>Name</th>
+              <th>Emp Code</th>
               <th>Address</th>
               <th>Primary Skill</th>
               <th>Secondary Skill</th>
               <th>Manager</th>
             </tr>
             <tr>
-              <td>{name}</td>
+              <td>{empcode}</td>
               <td>{address}</td>
-              <td>React JS</td>
-              <td>Express JS,Mongo DB,IIS 7,MS Azure</td>
-              <td>abcd@xyz.com</td>
+              <td>{pskill}</td>
+              <td>{sskill}</td>
+              <td>{memail}</td>
             </tr>
           </table>
         </div>
@@ -140,7 +150,6 @@ class UserDetails extends React.Component {
             <form
               onSubmit={(event) => {
                 event.preventDefault();
-                console.log('e', this.state);
               }}
             >
               <select
@@ -164,4 +173,7 @@ class UserDetails extends React.Component {
     );
   }
 }
-export default connect((state) => ({ userdetails: state.userdetails }), { fetchuserdetails })(UserDetails);
+export default connect((state) => ({ userdetails: state.userdetails, officialdetails: state.officialdetails }), {
+  fetchuserdetails,
+  fetchofficialdetails,
+})(UserDetails);
