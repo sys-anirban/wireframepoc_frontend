@@ -113,7 +113,7 @@ class UserDetails extends React.Component {
 
     const name = fname + ' ' + mname + ' ' + lname;
     const address = houseno + ', ' + city + ', ' + poffice + ', ' + landmark + ', ' + state + ', ' + pin;
-    if (isFetchingUserdetails) {
+    if (isFetchingUserdetails || isFetchingOfficialdetails) {
       return <Loader />;
     }
     return (
