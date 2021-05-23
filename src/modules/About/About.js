@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { fetchDescriptions } from '../../actions/description';
+import { connect } from 'react-redux';
 const Wrapper = styled.div`
   background-color: #b8b894;
   height: 420px;
@@ -8,12 +9,17 @@ const Wrapper = styled.div`
   border-radius: 5px;
 `;
 class AboutDetails extends React.Component {
+  componentDidMount() {
+    this.props.fetchDescriptions();
+  }
   render() {
     return (
       <div>
-        <Wrapper></Wrapper>
+        <Wrapper>
+          <p>About</p>
+        </Wrapper>
       </div>
     );
   }
 }
-export default AboutDetails;
+export default connect((state) => ({}), { fetchDescriptions })(AboutDetails);

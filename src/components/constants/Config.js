@@ -3,5 +3,7 @@ export const endPoints = () => ({
   userdetailsurl: '/user/userdetails',
   officialdetailsurl: '/user/officialdetails',
   updateskillset: '/user/updateskill',
+  teamdetails: '/user/team',
+  descriptiondetails: '/user/descriptions',
 });
 export default endPoints;
