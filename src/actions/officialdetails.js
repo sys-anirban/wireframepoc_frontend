@@ -16,3 +16,25 @@ export const fetchofficialdetails = () => {
       });
   };
 };
+
+export const updateskillset = (skilltype, skillname) => {
+  const emailid = sessionStorage.getItem('emailid');
+  return (dispatch, getState) => {
+    const { officialdetails } = getState().officialdetails;
+    const existedSkills = officialdetails[skilltype];
+    const updatedSkills = existedSkills + ',' + skillname;
+    dispatch({ type: actions.REQUEST_UPDATE_SKILL });
+    return apiClient
+      .patch(`${endPoints().updateskillset}?emailid=${emailid}`, {
+        skilltype,
+        updatedSkills,
+      })
+      .then((res) => {
+        console.log('res', res.data);
+        dispatch({ type: actions.RECEIVE_UPDATE_SKILL, payload: res.data });
+      })
+      .catch((error) => {
+        dispatch({ type: actions.FAILED_TO_UPDATE_SKILL });
+      });
+  };
+};
