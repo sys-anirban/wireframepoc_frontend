@@ -30,7 +30,6 @@ export const updateskillset = (skilltype, skillname) => {
         updatedSkills,
       })
       .then((res) => {
-        console.log('res', res.data);
         dispatch({ type: actions.RECEIVE_UPDATE_SKILL, payload: res.data });
       })
       .catch((error) => {
