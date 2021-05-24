@@ -2,25 +2,38 @@ import React from 'react';
 import styled from 'styled-components';
 import { fetchTeamDetails } from '../../actions/teammembers';
 import { connect } from 'react-redux';
+import Loader from '../../components/Loader';
+import { Wrapper } from './styled';
 
-const Wrapper = styled.div`
-  background-color: #b8b894;
-  height: 420px;
-  margin-top: 10px;
-  border-radius: 5px;
-`;
 class TeamDetails extends React.Component {
   componentDidMount() {
     this.props.fetchTeamDetails();
   }
   render() {
+    const {
+      teamDetails: { isLoadingTeamdetails, teammembers },
+    } = this.props;
+    if (isLoadingTeamdetails) {
+      <Loader />;
+    }
     return (
       <div>
         <Wrapper>
-          <h3>Meet the Team</h3>
+          <table className="customers">
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+            </tr>
+            {teammembers.map((member) => (
+              <tr>
+                <td>{member.name}</td>
+                <td>{member.work}</td>
+              </tr>
+            ))}
+          </table>
         </Wrapper>
       </div>
     );
   }
 }
-export default connect((state) => ({}), { fetchTeamDetails })(TeamDetails);
+export default connect((state) => ({ teamDetails: state.teamdetails }), { fetchTeamDetails })(TeamDetails);
