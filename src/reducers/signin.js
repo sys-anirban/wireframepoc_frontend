@@ -2,7 +2,7 @@ import actions from '../components/constants/actionTypes';
 
 const defaultState = {
   isLoading: false,
-  isUserAuthenticated: true,
+  isUserAuthenticated: false,
   isInvalid: false,
 };
 export const signin = (state = defaultState, action) => {

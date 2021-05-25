@@ -5,5 +5,6 @@ export const endPoints = () => ({
   updateskillset: '/user/updateskill',
   teamdetails: '/user/team',
   descriptiondetails: '/user/descriptions',
+  signupurl: '/user/signup',
 });
 export default endPoints;

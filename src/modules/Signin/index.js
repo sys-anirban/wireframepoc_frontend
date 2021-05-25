@@ -1,38 +1,11 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { signin } from '../../actions/signin';
 import { connect } from 'react-redux';
 import Form from '../../components/Form/Form';
 import { Field, ErrorMessage } from 'formik';
 import Loader from '../../components/Loader';
+import { Wrapper, SignInButton, SignUpButton } from './styled';
 import * as Yup from 'yup';
-
-const Wrapper = styled.div`
-  height: 200px;
-  position: relative;
-  margin-top: 50px;
-  label {
-    font-weight: bold;
-  }
-  p {
-    font-weight: bold;
-    color: red;
-    text-align: center;
-  }
-`;
-const Button = styled.button`
-  font-weight: 400;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #fff;
-  background-color: teal;
-  border-color: #005cbf;
-  margin-top: 20px;
-  position: absolute;
-  left: 47%;
-`;
 
 const loginValidation = Yup.object().shape({
   emailid: Yup.string().email('Invalid email').required('Required'),
@@ -93,7 +66,8 @@ class Signin extends Component {
               </div>
             </div>
           </div>
-          <Button type="submit">Login</Button>
+          <SignInButton type="submit">Login</SignInButton>
+          <SignUpButton type="button">Register</SignUpButton>
         </Form>
       </Wrapper>
     );

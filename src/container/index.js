@@ -3,6 +3,7 @@ import LoginComponent from '../modules/Signin/index';
 import DashboardComponent from '../modules/Dashboard/index';
 import AboutComponent from '../modules/About/index';
 import TeamComponent from '../modules/Team/index';
+import Signup from '../modules/Signup/index';
 import { connect } from 'react-redux';
 
 class Board extends Component {
@@ -19,6 +20,10 @@ class Board extends Component {
           return <AboutComponent />;
         case 'team':
           return <TeamComponent />;
+      }
+    } else {
+      if (page === 'signup') {
+        return <Signup />;
       }
     }
     return <LoginComponent />;

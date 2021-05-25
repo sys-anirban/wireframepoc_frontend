@@ -22,7 +22,7 @@ export const updateskillset = (skilltype, skillname) => {
   return (dispatch, getState) => {
     const { officialdetails } = getState().officialdetails;
     const existedSkills = officialdetails[skilltype];
-    const updatedSkills = existedSkills + ',' + skillname;
+    const updatedSkills = existedSkills ? existedSkills + ',' + skillname : skillname;
     dispatch({ type: actions.REQUEST_UPDATE_SKILL });
     return apiClient
       .patch(
