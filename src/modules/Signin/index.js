@@ -6,6 +6,7 @@ import { Field, ErrorMessage } from 'formik';
 import Loader from '../../components/Loader';
 import { Wrapper, SignInButton, SignUpButton } from './styled';
 import * as Yup from 'yup';
+import { changeComponent } from '../../actions/componentHandler';
 
 const loginValidation = Yup.object().shape({
   emailid: Yup.string().email('Invalid email').required('Required'),
@@ -67,10 +68,12 @@ class Signin extends Component {
             </div>
           </div>
           <SignInButton type="submit">Login</SignInButton>
-          <SignUpButton type="button">Register</SignUpButton>
+          <SignUpButton type="button" onClick={() => this.props.changeComponent('signup')}>
+            Register
+          </SignUpButton>
         </Form>
       </Wrapper>
     );
   }
 }
-export default connect((state) => ({ signinReducerData: state.signin }), { signin })(Signin);
+export default connect((state) => ({ signinReducerData: state.signin }), { signin, changeComponent })(Signin);

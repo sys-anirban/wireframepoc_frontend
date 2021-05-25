@@ -5,9 +5,9 @@ import { Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { signup } from '../../actions/signup';
 import { connect } from 'react-redux';
-import FilePicker from '../../components/FilePicker/FilePicker';
-import { generateBase64FromImage } from '../../utils/index';
-import Image from '../../components/image/index';
+// import FilePicker from '../../components/FilePicker/FilePicker';
+// import { generateBase64FromImage } from '../../utils/index';
+// import Image from '../../components/image/index';
 
 const signupValidation = Yup.object().shape({
   // emailid: Yup.string().email('Invalid email').required('Required'),
@@ -227,7 +227,7 @@ class SignUpComponent extends Component {
                 </div>
                 <div className="col-4">
                   <label>Manager Name</label>
-                  <Field name="manager" type="text" placeholder="manager" className="form-control" />
+                  <Field name="manager" type="text" placeholder="Manager Name" className="form-control" />
                   <ErrorMessage name="manager">
                     {(msg) => (
                       <p style={{ color: 'red', fontWeight: 'normal' }} className="text-left">
@@ -238,7 +238,7 @@ class SignUpComponent extends Component {
                 </div>
                 <div className="col-4">
                   <label>Manager Email Id</label>
-                  <Field name="memail" type="text" placeholder="manager Email Id" className="form-control" />
+                  <Field name="memail" type="text" placeholder="Manager Email ID" className="form-control" />
                   <ErrorMessage name="memail">
                     {(msg) => (
                       <p style={{ color: 'red', fontWeight: 'normal' }} className="text-left">
