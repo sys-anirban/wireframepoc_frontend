@@ -6,5 +6,6 @@ export const endPoints = () => ({
   teamdetails: '/user/team',
   descriptiondetails: '/user/descriptions',
   signupurl: '/user/signup',
+  verifyotp: '/user/verifyotp',
 });
 export default endPoints;

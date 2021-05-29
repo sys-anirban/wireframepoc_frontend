@@ -4,6 +4,7 @@ const defaultState = {
   isLoadingSignUp: false,
   isSuccessSignUp: false,
   iaFailedSignUp: false,
+  signupData: null,
 };
 export const signup = (state = defaultState, action) => {
   switch (action.type) {
@@ -17,6 +18,7 @@ export const signup = (state = defaultState, action) => {
         ...state,
         isLoadingSignUp: false,
         isSuccessSignUp: true,
+        signupData: action.payload.details,
       };
     case actions.FAILED_TO_SIGN_UP:
       return {

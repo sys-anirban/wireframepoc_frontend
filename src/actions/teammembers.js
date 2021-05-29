@@ -9,7 +9,6 @@ export const fetchTeamDetails = () => {
     return apiClient
       .get(`${endPoints().teamdetails}`, { headers: { emailid } })
       .then((res) => {
-        console.log('res', res.data);
         dispatch({ type: actions.RECEIVE_TEAM_DETAILS, payload: res.data });
       })
       .catch((error) => {

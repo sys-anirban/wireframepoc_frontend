@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { fetchTeamDetails } from '../../actions/teammembers';
 import { connect } from 'react-redux';
 import Loader from '../../components/Loader';

@@ -4,6 +4,7 @@ import DashboardComponent from '../modules/Dashboard/index';
 import AboutComponent from '../modules/About/index';
 import TeamComponent from '../modules/Team/index';
 import Signup from '../modules/Signup/index';
+import VerifyOTPComponent from '../modules/VerifyOTP/index';
 import { connect } from 'react-redux';
 
 class Board extends Component {
@@ -24,6 +25,8 @@ class Board extends Component {
     } else {
       if (page === 'signup') {
         return <Signup />;
+      } else if (page === 'verifyotp') {
+        return <VerifyOTPComponent />;
       }
     }
     return <LoginComponent />;

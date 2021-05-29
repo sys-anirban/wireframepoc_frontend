@@ -68,12 +68,7 @@ class SignUpComponent extends Component {
         )}
         {signupReducer.isSuccessSignUp && (
           <div style={{ backgroundColor: '#0aab53' }}>
-            <p style={{ color: 'white' }}>
-              Successfully created accont please{' '}
-              <button className="btn btn-primary m-2" onClick={() => this.props.changeComponent('dashboard')}>
-                Login now
-              </button>
-            </p>
+            <p style={{ color: 'white' }}>Successfully created accont please</p>
           </div>
         )}
         <Form

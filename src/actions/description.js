@@ -9,7 +9,6 @@ export const fetchDescriptions = () => {
     return apiClient
       .get(`${endPoints().descriptiondetails}`, { headers: { emailid } })
       .then((res) => {
-        console.log('res', res.data);
         dispatch({ type: actions.RECEIVE_DESCRIPTION_DETAILS, payload: res.data });
       })
       .catch((error) => {
