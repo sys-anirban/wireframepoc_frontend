@@ -5,38 +5,39 @@ import { Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { signup } from '../../actions/signup';
 import { connect } from 'react-redux';
-// import FilePicker from '../../components/FilePicker/FilePicker';
-// import { generateBase64FromImage } from '../../utils/index';
-// import Image from '../../components/image/index';
+import Loader from '../../components/Loader';
+import { changeComponent } from '../../actions/componentHandler';
 
 const signupValidation = Yup.object().shape({
-  // emailid: Yup.string().email('Invalid email').required('Required'),
-  // password: Yup.string().min(8, 'Too Short!').max(20, 'Too Long!').required('Password is Required'),
+  fname: Yup.string().required('First Name is Required'),
+  mname: Yup.string('Should be string'),
+  lname: Yup.string().required('Last Name is Required'),
+  emailid: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string()
+    .required('No password provided.')
+    .min(8, 'Too short - should be 8 chars minimum.')
+    .max(20, 'Too short - should be 8 chars minimum.')
+    .required('Required'),
+  cpassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Required'),
+  houseno: Yup.string().required('Required'),
+  landmark: Yup.string().required('Required'),
+  poffice: Yup.string().required('Required'),
+  city: Yup.string().required('Required'),
+  state: Yup.string().required('Required'),
+  pin: Yup.string().required('Required'),
+  empcode: Yup.string().min(6, 'Should be minimu 6 chars long'),
+  manager: Yup.string().required('Required'),
+  memail: Yup.string().email('Invalid email').required('Required'),
 });
 
 class SignUpComponent extends Component {
-  // state = {
-  //   imagePreview: null,
-  // };
-
-  // postInputChangeHandler = (files) => {
-  //   generateBase64FromImage(files[0])
-  //     .then((b64) => {
-  //       this.setState({ imagePreview: b64 });
-  //     })
-  //     .catch((e) => {
-  //       this.setState({ imagePreview: null });
-  //     });
-  // };
   onSubmitForm = (values) => {
-    // const formData = new FormData();
-    // Object.keys(values).forEach((value) => {
-    //   formData.append(value, values[value]);
-    // });
-    // formData.append('image', file);
     this.props.signup(values);
   };
   render() {
+    const { signupReducer } = this.props;
     const initialValues = {
       fname: '',
       mname: '',
@@ -54,8 +55,27 @@ class SignUpComponent extends Component {
       manager: '',
       memail: '',
     };
+    if (signupReducer.isLoadingSignUp) {
+      return <Loader />;
+    }
+
     return (
       <Wrapper>
+        {signupReducer.iaFailedSignUp && (
+          <div style={{ backgroundColor: '#b1b481' }}>
+            <p style={{ color: 'white' }}>Something went wrong , please try again !</p>
+          </div>
+        )}
+        {signupReducer.isSuccessSignUp && (
+          <div style={{ backgroundColor: '#0aab53' }}>
+            <p style={{ color: 'white' }}>
+              Successfully created accont please{' '}
+              <button className="btn btn-primary m-2" onClick={() => this.props.changeComponent('dashboard')}>
+                Login now
+              </button>
+            </p>
+          </div>
+        )}
         <Form
           initialValues={initialValues}
           validationSchema={signupValidation}
@@ -249,15 +269,6 @@ class SignUpComponent extends Component {
                 </div>
               </div>
             </div>
-            {/* <div className="col-3">
-              <div className="col-10">
-                <FilePicker id="image" label="Image" control="input" onChange={this.postInputChangeHandler} />
-                <div className="new-post__preview-image">
-                  {!this.state.imagePreview && <p>Please choose an image.</p>}
-                  {this.state.imagePreview && <Image imageUrl={this.state.imagePreview} contain left />}
-                </div>
-              </div>
-            </div> */}
           </div>
           <Button type="submit">Sign Up</Button>
         </Form>
@@ -265,4 +276,4 @@ class SignUpComponent extends Component {
     );
   }
 }
-export default connect((state) => ({}), { signup })(SignUpComponent);
+export default connect((state) => ({ signupReducer: state.signup }), { signup, changeComponent })(SignUpComponent);
