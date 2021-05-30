@@ -1,13 +1,17 @@
 import actions from '../components/constants/actionTypes';
-import apiClient from '../components/constants/apiClient';
 import endPoints from '../components/constants/Config';
+import { apiUrl } from '../components/constants/baseUrl';
+import axios from 'axios';
 
 export const fetchTeamDetails = () => {
   const emailid = sessionStorage.getItem('emailid');
+  const token = sessionStorage.getItem('token');
   return (dispatch) => {
     dispatch({ type: actions.REQUEST_TEAM_DETAILS });
-    return apiClient
-      .get(`${endPoints().teamdetails}`, { headers: { emailid } })
+    return axios
+      .get(`${apiUrl}${endPoints().teamdetails}`, {
+        headers: { emailid, Authorization: token ? `Bearer ${token}` : null },
+      })
       .then((res) => {
         dispatch({ type: actions.RECEIVE_TEAM_DETAILS, payload: res.data });
       })

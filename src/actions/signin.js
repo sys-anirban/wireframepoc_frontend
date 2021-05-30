@@ -1,12 +1,13 @@
 import actions from '../components/constants/actionTypes';
-import apiClient from '../components/constants/apiClient';
 import endPoints from '../components/constants/Config';
+import { apiUrl } from '../components/constants/baseUrl';
+import axios from 'axios';
 
 export const signin = (loginCredentials) => {
   return (dispatch) => {
     dispatch({ type: actions.REQUEST_SIGN_IN });
-    return apiClient
-      .post(`${endPoints().signinurl}`, loginCredentials)
+    return axios
+      .post(`${apiUrl}${endPoints().signinurl}`, loginCredentials)
       .then((res) => {
         const { token, isUserAuthenticated, emailid } = res.data;
         sessionStorage.setItem('token', token);

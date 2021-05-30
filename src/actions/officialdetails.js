@@ -1,13 +1,17 @@
 import actions from '../components/constants/actionTypes';
-import apiClient from '../components/constants/apiClient';
 import endPoints from '../components/constants/Config';
+import { apiUrl } from '../components/constants/baseUrl';
+import axios from 'axios';
 
 export const fetchofficialdetails = () => {
   const emailid = sessionStorage.getItem('emailid');
+  const token = sessionStorage.getItem('token');
   return (dispatch) => {
     dispatch({ type: actions.REQUEST_OFFICIAL_DETAILS });
-    return apiClient
-      .get(`${endPoints().officialdetailsurl}`, { headers: { emailid } })
+    return axios
+      .get(`${apiUrl}${endPoints().officialdetailsurl}`, {
+        headers: { emailid, Authorization: token ? `Bearer ${token}` : null },
+      })
       .then((res) => {
         dispatch({ type: actions.RECEIVE_OFFICIAL_DETAILS, payload: res.data });
       })
@@ -24,9 +28,9 @@ export const updateskillset = (skilltype, skillname) => {
     const existedSkills = officialdetails[skilltype];
     const updatedSkills = existedSkills ? existedSkills + ',' + skillname : skillname;
     dispatch({ type: actions.REQUEST_UPDATE_SKILL });
-    return apiClient
+    return axios
       .patch(
-        `${endPoints().updateskillset}`,
+        `${apiUrl}${endPoints().updateskillset}`,
         {
           skilltype,
           updatedSkills,

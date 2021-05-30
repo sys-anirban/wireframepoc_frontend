@@ -14,9 +14,9 @@ const Wrapper = styled.div`
   }
 `;
 class AboutDetails extends React.Component {
-  componentDidMount() {
-    this.props.fetchDescriptions();
-  }
+  // componentDidMount() {
+  //   this.props.fetchDescriptions();
+  // }
   render() {
     return (
       <Wrapper>

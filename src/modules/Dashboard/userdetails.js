@@ -13,7 +13,7 @@ class UserDetails extends React.Component {
   changeHandler = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
-  async componentDidMount() {
+  componentDidMount() {
     this.props.fetchuserdetails();
     this.props.fetchofficialdetails();
   }

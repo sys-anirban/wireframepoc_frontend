@@ -1,12 +1,16 @@
 import actions from '../components/constants/actionTypes';
-import apiClient from '../components/constants/apiClient';
 import endPoints from '../components/constants/Config';
+import { apiUrl } from '../components/constants/baseUrl';
+import axios from 'axios';
 
 export const verifyOTP = (otp, emailid) => {
+  const token = sessionStorage.getItem('token');
   return (dispatch) => {
     dispatch({ type: actions.REQUEST_VERIFY_OTP });
-    return apiClient
-      .get(`${endPoints().verifyotp}`, { headers: { emailid, otp } })
+    return axios
+      .get(`${apiUrl}${endPoints().verifyotp}`, {
+        headers: { emailid, otp, Authorization: token ? `Bearer ${token}` : null },
+      })
       .then((res) => {
         dispatch({ type: actions.RECEIVED_VERIFY_OTP, payload: res.data });
       })

@@ -1,13 +1,14 @@
 import actions from '../components/constants/actionTypes';
-import apiClient from '../components/constants/apiClient';
 import endPoints from '../components/constants/Config';
 import { changeComponent } from './componentHandler';
+import { apiUrl } from '../components/constants/baseUrl';
+import axios from 'axios';
 
 export const signup = (details) => {
   return (dispatch) => {
     dispatch({ type: actions.REQUEST_SIGN_UP });
-    return apiClient
-      .post(`${endPoints().signupurl}`, { body: details })
+    return axios
+      .post(`${apiUrl}${endPoints().signupurl}`, { body: details })
       .then((res) => {
         dispatch({ type: actions.RECEIVE_SIGN_UP, payload: { details } });
         dispatch(changeComponent('verifyotp'));
