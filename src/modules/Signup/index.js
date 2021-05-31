@@ -9,27 +9,27 @@ import Loader from '../../components/Loader';
 import { changeComponent } from '../../actions/componentHandler';
 
 const signupValidation = Yup.object().shape({
-  fname: Yup.string().required('First Name is Required'),
-  mname: Yup.string('Should be string'),
-  lname: Yup.string().required('Last Name is Required'),
-  emailid: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string()
-    .required('No password provided.')
-    .min(8, 'Too short - should be 8 chars minimum.')
-    .max(20, 'Too short - should be 8 chars minimum.')
-    .required('Required'),
-  cpassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Required'),
-  houseno: Yup.string().required('Required'),
-  landmark: Yup.string().required('Required'),
-  poffice: Yup.string().required('Required'),
-  city: Yup.string().required('Required'),
-  state: Yup.string().required('Required'),
-  pin: Yup.string().required('Required'),
-  empcode: Yup.string().min(6, 'Should be minimu 6 chars long'),
-  manager: Yup.string().required('Required'),
-  memail: Yup.string().email('Invalid email').required('Required'),
+  // fname: Yup.string().required('First Name is Required'),
+  // mname: Yup.string('Should be string'),
+  // lname: Yup.string().required('Last Name is Required'),
+  // emailid: Yup.string().email('Invalid email').required('Required'),
+  // password: Yup.string()
+  //   .required('No password provided.')
+  //   .min(8, 'Too short - should be 8 chars minimum.')
+  //   .max(20, 'Too short - should be 8 chars minimum.')
+  //   .required('Required'),
+  // cpassword: Yup.string()
+  //   .oneOf([Yup.ref('password'), null], 'Passwords must match')
+  //   .required('Required'),
+  // houseno: Yup.string().required('Required'),
+  // landmark: Yup.string().required('Required'),
+  // poffice: Yup.string().required('Required'),
+  // city: Yup.string().required('Required'),
+  // state: Yup.string().required('Required'),
+  // pin: Yup.string().required('Required'),
+  // empcode: Yup.string().min(6, 'Should be minimu 6 chars long'),
+  // manager: Yup.string().required('Required'),
+  // memail: Yup.string().email('Invalid email').required('Required'),
 });
 
 class SignUpComponent extends Component {
@@ -58,7 +58,6 @@ class SignUpComponent extends Component {
     if (signupReducer.isLoadingSignUp) {
       return <Loader />;
     }
-
     return (
       <Wrapper>
         {signupReducer.iaFailedSignUp && (
@@ -66,11 +65,12 @@ class SignUpComponent extends Component {
             <p style={{ color: 'white' }}>Something went wrong , please try again !</p>
           </div>
         )}
-        {signupReducer.isSuccessSignUp && (
+        {signupReducer.isalreadyRegistered && (
           <div style={{ backgroundColor: '#0aab53' }}>
-            <p style={{ color: 'white' }}>Successfully created accont please</p>
+            <p style={{ color: 'white' }}>User is already registered, please contact admin</p>
           </div>
         )}
+
         <Form
           initialValues={initialValues}
           validationSchema={signupValidation}

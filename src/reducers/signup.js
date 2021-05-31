@@ -5,6 +5,7 @@ const defaultState = {
   isSuccessSignUp: false,
   iaFailedSignUp: false,
   signupData: null,
+  isalreadyRegistered: false,
 };
 export const signup = (state = defaultState, action) => {
   switch (action.type) {
@@ -26,6 +27,9 @@ export const signup = (state = defaultState, action) => {
         isLoadingSignUp: false,
         iaFailedSignUp: true,
       };
+    case actions.USER_ALREADY_REGISTERED: {
+      return { ...state, isalreadyRegistered: action.payload, isLoadingSignUp: false };
+    }
     default:
       return state;
   }

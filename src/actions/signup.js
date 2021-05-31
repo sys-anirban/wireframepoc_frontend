@@ -10,8 +10,12 @@ export const signup = (details) => {
     return axios
       .post(`${apiUrl}${endPoints().signupurl}`, { body: details })
       .then((res) => {
-        dispatch({ type: actions.RECEIVE_SIGN_UP, payload: { details } });
-        dispatch(changeComponent('verifyotp'));
+        if (res.status === 200) {
+          dispatch({ type: actions.USER_ALREADY_REGISTERED, payload: res.data.alreadyRegistered });
+        } else if (res.status === 201) {
+          dispatch({ type: actions.RECEIVE_SIGN_UP, payload: { details } });
+          dispatch(changeComponent('verifyotp'));
+        }
       })
       .catch((error) => {
         dispatch({ type: actions.FAILED_SIGN_IN });
